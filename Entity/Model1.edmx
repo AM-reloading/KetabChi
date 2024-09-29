@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KetabkhoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admins">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admin_user" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="tem" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="book_mozo" Type="nvarchar(max)" />
+          <Property Name="book_radeseni" Type="nvarchar" MaxLength="30" />
+          <Property Name="book_molaf" Type="nvarchar" MaxLength="150" />
+          <Property Name="book_m_id" Type="int" />
+        </EntityType>
+        <EntityType Name="deleteds">
+          <Key>
+            <PropertyRef Name="deleted_id" />
+          </Key>
+          <Property Name="deleted_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deleted_book_id" Type="int" />
+          <Property Name="deleted_book_name" Type="nvarchar" MaxLength="200" />
+          <Property Name="deleted_book_mozo" Type="nvarchar(max)" />
+          <Property Name="deleted_book_radeseni" Type="nvarchar" MaxLength="30" />
+          <Property Name="deleted_book_molaf" Type="nvarchar" MaxLength="150" />
+          <Property Name="deleted_admin_id" Type="int" />
+          <Property Name="deleted_admin_user" Type="nvarchar" MaxLength="40" />
+          <Property Name="deleted_moshtarekin_id" Type="int" />
+          <Property Name="deleted_moshtarekin_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="deleted_moshtarekin_family" Type="nvarchar" MaxLength="50" />
+          <Property Name="deleted_moshtarekin_number" Type="nvarchar" MaxLength="70" />
+          <Property Name="deleted_moshtarekin_age" Type="int" />
+          <Property Name="deleted_moshtarekin_codmeli" Type="nvarchar" MaxLength="10" />
+          <Property Name="deleted_moshtarekin_start" Type="nvarchar" MaxLength="30" />
+          <Property Name="deleted_moshtarekin_timeago" Type="int" />
+        </EntityType>
+        <EntityType Name="moshtarekin">
+          <Key>
+            <PropertyRef Name="moshtarekin_id" />
+          </Key>
+          <Property Name="moshtarekin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moshtarekin_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="moshtarekin_family" Type="nvarchar" MaxLength="50" />
+          <Property Name="moshtarekin_number" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="moshtarekin_age" Type="int" Nullable="false" />
+          <Property Name="moshtarekin_codmeli" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="moshtarekin_start" Type="datetime" />
+          <Property Name="moshtarekin_timeago" Type="int" />
+          <Property Name="moshtarekin_timeend" Type="datetime" />
+          <Property Name="moshtarekin_b_id" Type="int" />
+        </EntityType>
+        <EntityType Name="trusts">
+          <Key>
+            <PropertyRef Name="trust_id" />
+          </Key>
+          <Property Name="trust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trust_mokhatabin_id" Type="int" />
+          <Property Name="trust_book_id" Type="int" />
+          <Property Name="trust_timestart" Type="datetime" />
+          <Property Name="trust_timeend" Type="datetime" />
+          <Property Name="trust_later" Type="int" />
+        </EntityType>
+        <EntityType Name="updataeds">
+          <Key>
+            <PropertyRef Name="updataed_id" />
+          </Key>
+          <Property Name="updataed_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="updataed_book_id" Type="int" />
+          <Property Name="updataed_book_name" Type="nvarchar" MaxLength="200" />
+          <Property Name="updataed_book_mozo" Type="nvarchar(max)" />
+          <Property Name="updataed_book_radeseni" Type="nvarchar" MaxLength="30" />
+          <Property Name="updataed_book_molaf" Type="nvarchar" MaxLength="150" />
+          <Property Name="updataed_admin_id" Type="int" />
+          <Property Name="updataed_admin_user" Type="nvarchar" MaxLength="40" />
+          <Property Name="updataed_moshtarekin_id" Type="int" />
+          <Property Name="updataed_moshtarekin_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="updataed_moshtarekin_family" Type="nvarchar" MaxLength="50" />
+          <Property Name="updataed_moshtarekin_number" Type="nvarchar" MaxLength="70" />
+          <Property Name="updataed_moshtarekin_age" Type="int" />
+          <Property Name="updataed_moshtarekin_codmeli" Type="nvarchar" MaxLength="10" />
+          <Property Name="updataed_moshtarekin_start" Type="nvarchar" MaxLength="30" />
+          <Property Name="updataed_moshtarekin_timeago" Type="int" />
+        </EntityType>
+        <Association Name="FK_Books_moshtarekin">
+          <End Role="moshtarekin" Type="Self.moshtarekin" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_id" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="book_m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_moshtarekin_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="moshtarekin" Type="Self.moshtarekin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_trusts_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="trusts" Type="Self.trusts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="trusts">
+              <PropertyRef Name="trust_book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_trusts_moshtarekin">
+          <End Role="moshtarekin" Type="Self.moshtarekin" Multiplicity="0..1" />
+          <End Role="trusts" Type="Self.trusts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_id" />
+            </Principal>
+            <Dependent Role="trusts">
+              <PropertyRef Name="trust_mokhatabin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KetabkhoneModelStoreContainer">
+          <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="deleteds" EntityType="Self.deleteds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="moshtarekin" EntityType="Self.moshtarekin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trusts" EntityType="Self.trusts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="updataeds" EntityType="Self.updataeds" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Books_moshtarekin" Association="Self.FK_Books_moshtarekin">
+            <End Role="moshtarekin" EntitySet="moshtarekin" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_moshtarekin_Books" Association="Self.FK_moshtarekin_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="moshtarekin" EntitySet="moshtarekin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_trusts_Books" Association="Self.FK_trusts_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="trusts" EntitySet="trusts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_trusts_moshtarekin" Association="Self.FK_trusts_moshtarekin">
+            <End Role="moshtarekin" EntitySet="moshtarekin" />
+            <End Role="trusts" EntitySet="trusts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KetabkhoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_user" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tem" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="book_mozo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="book_radeseni" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="book_molaf" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="trusts" Relationship="KetabkhoneModel.FK_trusts_Books" FromRole="Book" ToRole="trust" />
+          <Property Name="book_m_id" Type="Int32" />
+          <NavigationProperty Name="moshtarekin" Relationship="KetabkhoneModel.FK_Books_moshtarekin" FromRole="Book" ToRole="moshtarekin" />
+          <NavigationProperty Name="moshtarekins" Relationship="KetabkhoneModel.FK_moshtarekin_Books" FromRole="Book" ToRole="moshtarekin" />
+        </EntityType>
+        <EntityType Name="deleted">
+          <Key>
+            <PropertyRef Name="deleted_id" />
+          </Key>
+          <Property Name="deleted_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deleted_book_id" Type="Int32" />
+          <Property Name="deleted_book_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_book_mozo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_book_radeseni" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_book_molaf" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_admin_id" Type="Int32" />
+          <Property Name="deleted_admin_user" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_moshtarekin_id" Type="Int32" />
+          <Property Name="deleted_moshtarekin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_moshtarekin_family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_moshtarekin_number" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_moshtarekin_age" Type="Int32" />
+          <Property Name="deleted_moshtarekin_codmeli" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="deleted_moshtarekin_start" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="deleted_moshtarekin_timeago" Type="Int32" />
+        </EntityType>
+        <EntityType Name="moshtarekin">
+          <Key>
+            <PropertyRef Name="moshtarekin_id" />
+          </Key>
+          <Property Name="moshtarekin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moshtarekin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="moshtarekin_family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="moshtarekin_number" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="moshtarekin_age" Type="Int32" Nullable="false" />
+          <Property Name="moshtarekin_codmeli" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="moshtarekin_start" Type="DateTime" Precision="3" />
+          <Property Name="moshtarekin_timeago" Type="Int32" />
+          <NavigationProperty Name="trusts" Relationship="KetabkhoneModel.FK_trusts_moshtarekin" FromRole="moshtarekin" ToRole="trust" />
+          <Property Name="moshtarekin_timeend" Type="DateTime" Precision="3" />
+          <Property Name="moshtarekin_b_id" Type="Int32" />
+          <NavigationProperty Name="Books" Relationship="KetabkhoneModel.FK_Books_moshtarekin" FromRole="moshtarekin" ToRole="Book" />
+          <NavigationProperty Name="Book" Relationship="KetabkhoneModel.FK_moshtarekin_Books" FromRole="moshtarekin" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="trust">
+          <Key>
+            <PropertyRef Name="trust_id" />
+          </Key>
+          <Property Name="trust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="trust_book_id" Type="Int32" />
+          <Property Name="trust_mokhatabin_id" Type="Int32" />
+          <Property Name="trust_timestart" Type="DateTime" Precision="3" />
+          <Property Name="trust_timeend" Type="DateTime" Precision="3" />
+          <Property Name="trust_later" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="KetabkhoneModel.FK_trusts_Books" FromRole="trust" ToRole="Book" />
+          <NavigationProperty Name="moshtarekin" Relationship="KetabkhoneModel.FK_trusts_moshtarekin" FromRole="trust" ToRole="moshtarekin" />
+        </EntityType>
+        <EntityType Name="updataed">
+          <Key>
+            <PropertyRef Name="updataed_id" />
+          </Key>
+          <Property Name="updataed_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="updataed_book_id" Type="Int32" />
+          <Property Name="updataed_book_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_book_mozo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_book_radeseni" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_book_molaf" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_admin_id" Type="Int32" />
+          <Property Name="updataed_admin_user" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_moshtarekin_id" Type="Int32" />
+          <Property Name="updataed_moshtarekin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_moshtarekin_family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_moshtarekin_number" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_moshtarekin_age" Type="Int32" />
+          <Property Name="updataed_moshtarekin_codmeli" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="updataed_moshtarekin_start" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="updataed_moshtarekin_timeago" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="KetabkhoneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="deleteds" EntityType="Self.deleted" />
+          <EntitySet Name="moshtarekins" EntityType="Self.moshtarekin" />
+          <EntitySet Name="trusts" EntityType="Self.trust" />
+          <EntitySet Name="updataeds" EntityType="Self.updataed" />
+          <AssociationSet Name="FK_trusts_Books" Association="KetabkhoneModel.FK_trusts_Books">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="trust" EntitySet="trusts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_trusts_moshtarekin" Association="KetabkhoneModel.FK_trusts_moshtarekin">
+            <End Role="moshtarekin" EntitySet="moshtarekins" />
+            <End Role="trust" EntitySet="trusts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Books_moshtarekin" Association="KetabkhoneModel.FK_Books_moshtarekin">
+            <End Role="moshtarekin" EntitySet="moshtarekins" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_moshtarekin_Books" Association="KetabkhoneModel.FK_moshtarekin_Books">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="moshtarekin" EntitySet="moshtarekins" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_trusts_Books">
+          <End Type="KetabkhoneModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="KetabkhoneModel.trust" Role="trust" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="trust">
+              <PropertyRef Name="trust_book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_trusts_moshtarekin">
+          <End Type="KetabkhoneModel.moshtarekin" Role="moshtarekin" Multiplicity="0..1" />
+          <End Type="KetabkhoneModel.trust" Role="trust" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_id" />
+            </Principal>
+            <Dependent Role="trust">
+              <PropertyRef Name="trust_mokhatabin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Books_moshtarekin">
+          <End Type="KetabkhoneModel.moshtarekin" Role="moshtarekin" Multiplicity="0..1" />
+          <End Type="KetabkhoneModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="book_m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_moshtarekin_Books">
+          <End Type="KetabkhoneModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="KetabkhoneModel.moshtarekin" Role="moshtarekin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="moshtarekin">
+              <PropertyRef Name="moshtarekin_b_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KetabkhoneModelStoreContainer" CdmEntityContainer="KetabkhoneEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="KetabkhoneModel.admin">
+              <MappingFragment StoreEntitySet="admins">
+                <ScalarProperty Name="tem" ColumnName="tem" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_user" ColumnName="admin_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="KetabkhoneModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="book_m_id" ColumnName="book_m_id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="book_name" ColumnName="book_name" />
+                <ScalarProperty Name="book_mozo" ColumnName="book_mozo" />
+                <ScalarProperty Name="book_radeseni" ColumnName="book_radeseni" />
+                <ScalarProperty Name="book_molaf" ColumnName="book_molaf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="deleteds">
+            <EntityTypeMapping TypeName="KetabkhoneModel.deleted">
+              <MappingFragment StoreEntitySet="deleteds">
+                <ScalarProperty Name="deleted_id" ColumnName="deleted_id" />
+                <ScalarProperty Name="deleted_book_id" ColumnName="deleted_book_id" />
+                <ScalarProperty Name="deleted_book_name" ColumnName="deleted_book_name" />
+                <ScalarProperty Name="deleted_book_mozo" ColumnName="deleted_book_mozo" />
+                <ScalarProperty Name="deleted_book_radeseni" ColumnName="deleted_book_radeseni" />
+                <ScalarProperty Name="deleted_book_molaf" ColumnName="deleted_book_molaf" />
+                <ScalarProperty Name="deleted_admin_id" ColumnName="deleted_admin_id" />
+                <ScalarProperty Name="deleted_admin_user" ColumnName="deleted_admin_user" />
+                <ScalarProperty Name="deleted_moshtarekin_id" ColumnName="deleted_moshtarekin_id" />
+                <ScalarProperty Name="deleted_moshtarekin_name" ColumnName="deleted_moshtarekin_name" />
+                <ScalarProperty Name="deleted_moshtarekin_family" ColumnName="deleted_moshtarekin_family" />
+                <ScalarProperty Name="deleted_moshtarekin_number" ColumnName="deleted_moshtarekin_number" />
+                <ScalarProperty Name="deleted_moshtarekin_age" ColumnName="deleted_moshtarekin_age" />
+                <ScalarProperty Name="deleted_moshtarekin_codmeli" ColumnName="deleted_moshtarekin_codmeli" />
+                <ScalarProperty Name="deleted_moshtarekin_start" ColumnName="deleted_moshtarekin_start" />
+                <ScalarProperty Name="deleted_moshtarekin_timeago" ColumnName="deleted_moshtarekin_timeago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="moshtarekins">
+            <EntityTypeMapping TypeName="KetabkhoneModel.moshtarekin">
+              <MappingFragment StoreEntitySet="moshtarekin">
+                <ScalarProperty Name="moshtarekin_b_id" ColumnName="moshtarekin_b_id" />
+                <ScalarProperty Name="moshtarekin_timeend" ColumnName="moshtarekin_timeend" />
+                <ScalarProperty Name="moshtarekin_id" ColumnName="moshtarekin_id" />
+                <ScalarProperty Name="moshtarekin_name" ColumnName="moshtarekin_name" />
+                <ScalarProperty Name="moshtarekin_family" ColumnName="moshtarekin_family" />
+                <ScalarProperty Name="moshtarekin_number" ColumnName="moshtarekin_number" />
+                <ScalarProperty Name="moshtarekin_age" ColumnName="moshtarekin_age" />
+                <ScalarProperty Name="moshtarekin_codmeli" ColumnName="moshtarekin_codmeli" />
+                <ScalarProperty Name="moshtarekin_start" ColumnName="moshtarekin_start" />
+                <ScalarProperty Name="moshtarekin_timeago" ColumnName="moshtarekin_timeago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trusts">
+            <EntityTypeMapping TypeName="KetabkhoneModel.trust">
+              <MappingFragment StoreEntitySet="trusts">
+                <ScalarProperty Name="trust_mokhatabin_id" ColumnName="trust_mokhatabin_id" />
+                <ScalarProperty Name="trust_book_id" ColumnName="trust_book_id" />
+                <ScalarProperty Name="trust_id" ColumnName="trust_id" />
+                <ScalarProperty Name="trust_timestart" ColumnName="trust_timestart" />
+                <ScalarProperty Name="trust_timeend" ColumnName="trust_timeend" />
+                <ScalarProperty Name="trust_later" ColumnName="trust_later" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="updataeds">
+            <EntityTypeMapping TypeName="KetabkhoneModel.updataed">
+              <MappingFragment StoreEntitySet="updataeds">
+                <ScalarProperty Name="updataed_id" ColumnName="updataed_id" />
+                <ScalarProperty Name="updataed_book_id" ColumnName="updataed_book_id" />
+                <ScalarProperty Name="updataed_book_name" ColumnName="updataed_book_name" />
+                <ScalarProperty Name="updataed_book_mozo" ColumnName="updataed_book_mozo" />
+                <ScalarProperty Name="updataed_book_radeseni" ColumnName="updataed_book_radeseni" />
+                <ScalarProperty Name="updataed_book_molaf" ColumnName="updataed_book_molaf" />
+                <ScalarProperty Name="updataed_admin_id" ColumnName="updataed_admin_id" />
+                <ScalarProperty Name="updataed_admin_user" ColumnName="updataed_admin_user" />
+                <ScalarProperty Name="updataed_moshtarekin_id" ColumnName="updataed_moshtarekin_id" />
+                <ScalarProperty Name="updataed_moshtarekin_name" ColumnName="updataed_moshtarekin_name" />
+                <ScalarProperty Name="updataed_moshtarekin_family" ColumnName="updataed_moshtarekin_family" />
+                <ScalarProperty Name="updataed_moshtarekin_number" ColumnName="updataed_moshtarekin_number" />
+                <ScalarProperty Name="updataed_moshtarekin_age" ColumnName="updataed_moshtarekin_age" />
+                <ScalarProperty Name="updataed_moshtarekin_codmeli" ColumnName="updataed_moshtarekin_codmeli" />
+                <ScalarProperty Name="updataed_moshtarekin_start" ColumnName="updataed_moshtarekin_start" />
+                <ScalarProperty Name="updataed_moshtarekin_timeago" ColumnName="updataed_moshtarekin_timeago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
